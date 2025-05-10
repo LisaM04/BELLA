@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Mode - Fashion Boutique</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #ff69b4; /* Hot pink */
+            --secondary: #000000; /* Black */
+            --accent: #ff1493; /* Deep pink */
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-light: #fff0f5; /* Lavender blush */
+            --bg-dark: #1a1a1a;
+        }
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+       
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+       
+        /* Header Styles */
+        header {
+            background-color: var(--secondary);
+            padding: 1.5rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+       
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+       
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+       
+        .logo span {
+            color: var(--text-light);
+        }
+       
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+       
+        .nav-links li {
+            margin-left: 2rem;
+        }
+       
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+       
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+       
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+       
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+       
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            margin-top: 80px;
+        }
+       
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+       
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+       
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+       
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+       
+        .btn:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+       
+        /* Featured Collection */
+        .featured {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+       
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+       
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+       
+        .product-card {
+            background-color: var(--bg-dark);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+       
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+       
+        .product-img {
+            height: 350px;
+            overflow: hidden;
+        }
+       
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+       
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+       
+        .product-info {
+            padding: 1.5rem;
+        }
+       
+        .product-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+       
+        .product-info p {
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+       
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+       
+        /* Blog Section */
+        .blog {
+            padding: 5rem 2rem;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+       
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+       
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+       
+        .blog-post {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+       
+        .blog-img {
+            height: 250px;
+            overflow: hidden;
+        }
+       
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+       
+        .blog-content {
+            padding: 1.5rem;
+        }
+       
+        .blog-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+       
+        .blog-content .meta {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+       
+        .blog-content .meta span {
+            margin-right: 1rem;
+        }
+       
+        .blog-content p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+       
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+       
+        .read-more:hover {
+            text-decoration: underline;
+        }
+       
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+       
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+       
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+       
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+       
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+       
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #aaa;
+        }
+       
+        /* Web Hosting Info */
+        .hosting-info {
+            padding: 5rem 2rem;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+       
+        .hosting-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+       
+        .hosting-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+       
+        .hosting-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+       
+        .hosting-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+       
+        .hosting-img img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+       
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+       
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--bg-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+       
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+       
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+       
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-family: inherit;
+        }
+       
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+       
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+       
+        .submit-btn:hover {
+            background-color: var(--accent);
+        }
+       
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+       
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+       
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+       
+        .social-links a {
+            color: white;
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+       
+        .social-links a:hover {
+            color: var(--primary);
+        }
+       
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+       
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+       
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+       
+        .copyright {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+       
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+       
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--secondary);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s;
+            }
+           
+            .nav-links.active {
+                left: 0;
+            }
+           
+            .nav-links li {
+                margin: 1rem 0;
+            }
+           
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+            }
+           
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+           
+            .about-content,
+            .hosting-content {
+                grid-template-columns: 1fr;
+            }
+           
+            .about-img,
+            .hosting-img {
+                order: -1;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <a href="#" class="logo">Bella<span>Mode</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#featured">Collection</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>New Summer Collection</h1>
+            <p>Discover our latest fashion trends and elevate your style with our exclusive collection of dresses and accessories.</p>
+            <a href="#featured" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Featured Collection -->
+    <section class="featured" id="featured">
+        <h2 class="section-title">Featured Collection</h2>
+        <div class="products">
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Floral Summer Dress">
+                </div>
+                <div class="product-info">
+                    <h3>Floral Summer Dress</h3>
+                    <p>Lightweight and comfortable for sunny days</p>
+                    <div class="price">R889.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Elegant Evening Gown">
+                </div>
+                <div class="product-info">
+                    <h3>Elegant Evening Gown</h3>
+                    <p>Perfect for special occasions</p>
+                    <div class="price">R789.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Casual Denim Dress">
+                </div>
+                <div class="product-info">
+                    <h3>Casual Denim Dress</h3>
+                    <p>Versatile for day-to-night wear</p>
+                    <div class="price">R799.99</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Silk Maxi Dress">
+                </div>
+                <div class="product-info">
+                    <h3>Silk Maxi Dress</h3>
+                    <p>Luxurious fabric with elegant drape</p>
+                    <div class="price">R1129.99</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="blog-container">
+            <h2 class="section-title">Fashion Blog</h2>
+            <div class="blog-posts">
+                <article class="blog-post">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Summer Trends">
+                    </div>
+                    <div class="blog-content">
+                        <h3>Top Summer Fashion Trends 2023</h3>
+                        <div class="meta">
+                            <span><i class="far fa-calendar"></i> June 15, 2025</span>
+                            <span><i class="far fa-user"></i> By Jessica Parker</span>
+                        </div>
+                        <p>Discover the hottest summer fashion trends this season, from bold prints to minimalist styles that will keep you looking chic all summer long.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                <article class="blog-post">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1457972729786-0411a3a2a0c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Accessory Guide">
+                    </div>
+                    <div class="blog-content">
+                        <h3>How to Accessorize Your Summer Dresses</h3>
+                        <div class="meta">
+                            <span><i class="far fa-calendar"></i> May 28, 2025</span>
+                            <span><i class="far fa-user"></i> By Anelisa Mazondwa</span>
+                        </div>
+                        <p>Learn the art of accessorizing to transform your summer dresses from day to night with these simple yet effective styling tips.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">Our Story</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Bella Mode Fashion Boutique</h2>
+                <p>Founded in 2015, Bella Mode has been dedicated to bringing high-quality, fashionable clothing to women who appreciate both style and comfort. Our mission is to empower women to feel confident and beautiful in their own skin.</p>
+                <p>We carefully curate our collections to offer a mix of timeless classics and the latest trends, ensuring there's something for every occasion and personal style.</p>
+                <p>All our garments are ethically sourced and made with sustainable materials whenever possible, because we believe fashion should be beautiful inside and out.</p>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bella Mode Boutique">
+            </div>
+        </div>
+    </section>
+
+    <!-- Web Hosting Info -->
+    <section class="hosting-info">
+        <div class="hosting-container">
+            <h2 class="section-title">Web Hosting & Deployment</h2>
+            <div class="hosting-content">
+                <div class="hosting-text">
+                 
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#featured">Shop</a>
+                <a href="#blog">Blog</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <p class="copyright">© 2015 Bella Mode. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+       
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+       
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+       
+        // Form Submission
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+       
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+               
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+               
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
