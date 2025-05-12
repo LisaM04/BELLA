@@ -1,3 +1,4 @@
+Our Story 
 Bella Mode Fashion Boutique
 Founded in 2015, Bella Mode has been dedicated to bringing high-quality, fashionable clothing to women who appreciate both style and comfort. Our mission is to empower women to feel confident and beautiful in their own skin.
 
